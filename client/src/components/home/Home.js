@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import Product from '../product/Product';
+import Product from '../product/index';
 
 const Home = () => {
   return (
@@ -8,7 +8,7 @@ const Home = () => {
       <div className='home__container'>
         <img
           className='home__image'
-          src='https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/merch2016/Hero/Covid19/Generic/GWBleedingHero_ENG_COVIDUPDATE__XSite_1500x600_PV_en-GB._CB428684220_.jpg'
+          src='https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/gateway/placement/launch/TheBoysS2/THBY_2020_GWBleedingHero_ENG_COVIDUPDATE_XSite_3000x1200_PV_en-GB._CB406828640_.jpg'
           alt=''
         />
       </div>
@@ -37,7 +37,7 @@ const Home = () => {
           Samsung Galaxy S10 Lite Mobile Phone; Sim Free Smartphone - Prism Black (UK version)'
           price={490.59}
           image='https://images-na.ssl-images-amazon.com/images/I/71LPPpQkoBL._AC_SL1500_.jpg'
-          rating={5}
+          rating={3}
         />
       </div>
 
