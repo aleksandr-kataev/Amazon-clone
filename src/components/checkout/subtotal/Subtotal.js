@@ -1,10 +1,12 @@
 import React from 'react';
 import CurrencyFormat from 'react-currency-format';
+import { useHistory } from 'react-router-dom';
 import './Subtotal.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { getBasketTotal } from '../../../contextAPI/reducer';
 
 const Subtotal = () => {
+  const history = useHistory();
   const [{ basket }] = useStateValue();
 
   return (
@@ -16,9 +18,10 @@ const Subtotal = () => {
               Subtotal ({basket.length} items):{' '}
               <strong>{value}</strong>
             </p>
-            <small className='subtotal__gift'>
-              <input type='checkbox' /> This order contains gift
-            </small>
+            <div className='subtotal__gift'>
+              <input type='checkbox' />{' '}
+              <p>This order contains gift</p>
+            </div>
           </>
         )}
         decimalScale={2}
@@ -28,7 +31,9 @@ const Subtotal = () => {
         prefix={'£'}
       />
 
-      <button>Proceed to Checkout</button>
+      <button onClick={(e) => history.push('/payment')}>
+        Proceed to Checkout
+      </button>
     </div>
   );
 };

@@ -29,3 +29,11 @@
 .subtotal > button:hover {
   background: #ecc35a;
 }
+
+.subtotal__gift > input {
+  margin-right: 5px;
+}
+
+.subtotal__gift > p {
+  font-size: 13px;
+}
