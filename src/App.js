@@ -8,7 +8,14 @@ import { auth } from './firebase';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import './App.css';
-import { Home, Header, Checkout, Login, Payment } from './components';
+import {
+  Home,
+  Header,
+  Checkout,
+  Login,
+  Payment,
+  Orders,
+} from './components';
 import { useStateValue } from './contextAPI/StateProvider';
 
 // put in cofig?
@@ -53,6 +60,11 @@ function App() {
             <Elements stripe={promise}>
               <Payment />
             </Elements>
+          </Route>
+
+          <Route path='/orders'>
+            <Header />
+            <Orders />
           </Route>
 
           <Route path='/'>

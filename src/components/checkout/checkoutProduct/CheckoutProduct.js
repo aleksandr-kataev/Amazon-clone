@@ -2,7 +2,7 @@ import React from 'react';
 import './CheckoutProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 
-const CheckoutProduct = ({ item }) => {
+const CheckoutProduct = ({ item, hideRemove }) => {
   const { id, title, price, image, rating } = item;
   const [state, dispatch] = useStateValue();
 
@@ -15,7 +15,11 @@ const CheckoutProduct = ({ item }) => {
 
   return (
     <div className='checkoutProduct'>
-      <img className='checkoutProduct__image' src={image} />
+      <img
+        className='checkoutProduct__image'
+        alt='product'
+        src={image}
+      />
 
       <div className='checkoutProduct__info'>
         <p className='checkoutProduct__title'>{title}</p>
@@ -30,7 +34,11 @@ const CheckoutProduct = ({ item }) => {
               <p key={i}>⭐</p>
             ))}
         </div>
-        <button onClick={removeFromBasket}>Remove from basket</button>
+        {!hideRemove && (
+          <button onClick={removeFromBasket}>
+            Remove from basket
+          </button>
+        )}
       </div>
     </div>
   );

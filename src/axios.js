@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: '...', // API URL
+  baseURL: 'http://localhost:5001/clone-332a8/us-central1/api',
 });
 
 export default instance;

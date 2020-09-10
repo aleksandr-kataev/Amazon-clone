@@ -6,6 +6,7 @@ import {
   CardElement,
 } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
+import { db } from '../../firebase';
 import axios from '../../axios';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import './Payment.css';
@@ -13,7 +14,7 @@ import CheckoutProduct from '../checkout/checkoutProduct/CheckoutProduct';
 import { getBasketTotal } from '../../contextAPI/reducer';
 
 const Payment = () => {
-  const [{ user, basket }] = useStateValue();
+  const [{ user, basket }, dispatch] = useStateValue();
   const history = useHistory();
   const stripe = useStripe();
   const elements = useElements();
@@ -42,7 +43,6 @@ const Payment = () => {
     };
     getClientSecret();
   }, [basket]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setProcessing(true);
@@ -55,9 +55,23 @@ const Payment = () => {
       })
       .then(({ paymentIntent }) => {
         // getting the payment confirmation
+
+        db.collection('users')
+          .doc(user?.uid)
+          .collection('orders')
+          .doc(paymentIntent.id)
+          .set({
+            basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+        dispatch({
+          type: 'EMPTY_BASKET',
+        });
         history.replace('/orders');
       })
       .catch((e) => {
@@ -117,6 +131,7 @@ const Payment = () => {
                 />
                 <button
                   disabled={processing || disabled || succeeded}
+                  className='payment__button'
                 >
                   <span>
                     {processing ? <p>Processing</p> : 'Buy Now'}
