@@ -1,28 +1,40 @@
 import React, { useState } from 'react';
 import './Login.css';
 import { Link, useHistory } from 'react-router-dom';
-import auth from '../../firebase';
+import { auth } from '../../firebase';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const history = useHistory();
 
   const handleSignIn = (e) => {
     e.preventDefault();
+    if ((email || password) === '') {
+      console.log('err');
+      setError('Empty fields');
+      return;
+    }
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
         history.push('/');
       })
-      .catch((err) => {
-        console.warn(err.message);
+      .catch((error) => {
+        console.warn(error);
       });
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
+    console.log(`email: ${email}, password: ${password}`);
+    if ((email || password) === '') {
+      console.log('err');
+      setError('Empty fields');
+      return;
+    }
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
@@ -32,7 +44,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        console.warn(err.message);
+        setError(err.message);
       });
   };
 
@@ -46,7 +58,7 @@ const Login = () => {
         />
       </Link>
       <div className='login__cnt'>
-        <h1>Sign in</h1>
+        <h1>Sign in or Register</h1>
         <form>
           <h5>E-mail</h5>
           <input
@@ -62,6 +74,8 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
 
+          <p className='login__error'>{error}</p>
+
           <button
             type='submit'
             className='login__signInButton'
@@ -70,7 +84,7 @@ const Login = () => {
             Sign in
           </button>
 
-          <p>
+          <p className='login__agreement'>
             By signing-in you agree to AMAZON'S CLONE Conditions of
             Use & Sale. Please see out Privacy Notice, out Cookies
             Notice and out Interest-Based Ads

@@ -3,7 +3,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import auth from '../../firebase';
+import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Header = () => {

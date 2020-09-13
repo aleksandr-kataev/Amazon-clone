@@ -42,7 +42,7 @@
   font-size: 15px;
 }
 
-.login__cnt > form > p {
+.login__agreement {
   margin-top: 15px;
   font-size: 12px;
 }
@@ -64,4 +64,10 @@
   border: 1px solid;
   margin-top: 10px;
   border-color: darkgray;
+}
+
+.login__error {
+  color: #ca3424;
+  text-align: center;
+  font-size: 12px;
 }
