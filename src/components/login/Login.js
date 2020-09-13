@@ -27,27 +27,6 @@ const Login = () => {
       });
   };
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    console.log(`email: ${email}, password: ${password}`);
-    if ((email || password) === '') {
-      console.log('err');
-      setError('Empty fields');
-      return;
-    }
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        console.log(auth);
-        if (auth) {
-          history.push('/');
-        }
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  };
-
   return (
     <div className='login'>
       <Link to='/'>
@@ -58,7 +37,7 @@ const Login = () => {
         />
       </Link>
       <div className='login__cnt'>
-        <h1>Sign in or Register</h1>
+        <h1>Sign in</h1>
         <form>
           <h5>E-mail</h5>
           <input
@@ -92,7 +71,7 @@ const Login = () => {
 
           <button
             className='login__registerButton'
-            onClick={handleRegister}
+            onClick={() => history.push('/register')}
           >
             Create your Amazon account
           </button>

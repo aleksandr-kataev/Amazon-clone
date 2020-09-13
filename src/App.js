@@ -13,6 +13,7 @@ import {
   Header,
   Checkout,
   Login,
+  Register,
   Payment,
   Orders,
 } from './components';
@@ -46,6 +47,10 @@ function App() {
         <Switch>
           <Route path='/login'>
             <Login />
+          </Route>
+
+          <Route path='/register'>
+            <Register />
           </Route>
 
           <Route path='/checkout'>
