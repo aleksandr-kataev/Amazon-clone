@@ -16,6 +16,7 @@ firebase.json
 # production
 /build
 
+
 .env
 
 # misc
