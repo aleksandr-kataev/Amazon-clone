@@ -1,6 +1,10 @@
+import { returnTrue } from 'react-currency-format/lib/utils';
+
 export const initialState = {
   basket: [],
   user: null,
+  products: [],
+  deals: [],
 };
 
 // payload insterad of item
@@ -42,6 +46,17 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+      };
+    case 'GET_PRODUCTS':
+      return {
+        ...state,
+        products: action.products,
+      };
+
+    case 'GET_DEALS':
+      return {
+        ...state,
+        deals: action.deals,
       };
 
     default:

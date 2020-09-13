@@ -4,6 +4,7 @@ import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Product = ({ id, title, image, price, rating }) => {
   const [state, dispatch] = useStateValue();
+  console.log(image);
 
   const addToBasket = () => {
     dispatch({
@@ -26,7 +27,7 @@ const Product = ({ id, title, image, price, rating }) => {
           <strong>{price}</strong>
         </p>
         <div className='product__rating'>
-          {Array(rating)
+          {Array(Math.trunc(rating))
             .fill()
             .map((_, i) => (
               <p key={i}>⭐</p>

@@ -10,6 +10,7 @@ import { db } from '../../firebase';
 import axios from '../../axios';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import './Payment.css';
+import { Header } from '../index';
 import CheckoutProduct from '../checkout/checkoutProduct/CheckoutProduct';
 import { getBasketTotal } from '../../contextAPI/reducer';
 
@@ -85,65 +86,68 @@ const Payment = () => {
   };
 
   return (
-    <div className='payment'>
-      <div className='payment__container'>
-        <h1>
-          Checkout (<Link to='/checkout'>{basket?.length} items</Link>
-          )
-        </h1>
-        <div className='payment__section'>
-          <div className='payment__title'>
-            <h3>Delivery Address</h3>
+    <>
+      <Header />
+      <div className='payment'>
+        <div className='payment__container'>
+          <h1>
+            Checkout (
+            <Link to='/checkout'>{basket?.length} items</Link>)
+          </h1>
+          <div className='payment__section'>
+            <div className='payment__title'>
+              <h3>Delivery Address</h3>
+            </div>
+            <div className='payment__address'>
+              <p>{user?.email}</p>
+              <p>123 React drive</p>
+              <p>London, UK</p>
+            </div>
           </div>
-          <div className='payment__address'>
-            <p>{user?.email}</p>
-            <p>123 React drive</p>
-            <p>London, UK</p>
+          <div className='payment__section'>
+            <div className='payment__title'>
+              <h3>Review items and delivery</h3>
+            </div>
+            <div className='payment__items'>
+              {basket.map((item) => (
+                <CheckoutProduct item={item} />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className='payment__section'>
-          <div className='payment__title'>
-            <h3>Review items and delivery</h3>
-          </div>
-          <div className='payment__items'>
-            {basket.map((item) => (
-              <CheckoutProduct item={item} />
-            ))}
-          </div>
-        </div>
-        <div className='payment__section'>
-          <div className='payment__title'>
-            <h3>Payment methods</h3>
-          </div>
-          <div className='payment__details'>
-            <form onSubmit={handleSubmit}>
-              <CardElement onChange={handleChange} />
-              <div className='payment__priceContainer'>
-                <CurrencyFormat
-                  renderText={(value) => (
-                    <h3>Order Total: {value}</h3>
-                  )}
-                  decimalScale={2}
-                  value={getBasketTotal(basket)}
-                  displayType={'text'}
-                  thousandSeparator={true}
-                  prefix={'£'}
-                />
-                <button
-                  disabled={processing || disabled || succeeded}
-                  className='payment__button'
-                >
-                  <span>
-                    {processing ? <p>Processing</p> : 'Buy Now'}
-                  </span>
-                </button>
-              </div>
-              {error && <div>{error}</div>}
-            </form>
+          <div className='payment__section'>
+            <div className='payment__title'>
+              <h3>Payment methods</h3>
+            </div>
+            <div className='payment__details'>
+              <form onSubmit={handleSubmit}>
+                <CardElement onChange={handleChange} />
+                <div className='payment__priceContainer'>
+                  <CurrencyFormat
+                    renderText={(value) => (
+                      <h3>Order Total: {value}</h3>
+                    )}
+                    decimalScale={2}
+                    value={getBasketTotal(basket)}
+                    displayType={'text'}
+                    thousandSeparator={true}
+                    prefix={'£'}
+                  />
+                  <button
+                    disabled={processing || disabled || succeeded}
+                    className='payment__button'
+                  >
+                    <span>
+                      {processing ? <p>Processing</p> : 'Buy Now'}
+                    </span>
+                  </button>
+                </div>
+                {error && <div>{error}</div>}
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

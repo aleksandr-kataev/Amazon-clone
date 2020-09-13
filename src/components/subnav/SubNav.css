@@ -1,0 +1,9 @@
+.subnav {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #13263f;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

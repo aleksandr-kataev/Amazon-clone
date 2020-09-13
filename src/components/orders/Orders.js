@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import Order from './order/Order';
+import { SubNav, Header } from '../index';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import './Orders.css';
 
@@ -28,14 +29,18 @@ const Orders = () => {
   }, [user]);
 
   return (
-    <div className='orders'>
-      <h1>Your Orders</h1>
-      <div className='orders__ocontainer'>
-        {orders?.map((order) => (
-          <Order order={order} />
-        ))}
+    <>
+      <Header />
+      <SubNav />
+      <div className='orders'>
+        <h1>Your Orders</h1>
+        <div className='orders__ocontainer'>
+          {orders?.map((order) => (
+            <Order order={order} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

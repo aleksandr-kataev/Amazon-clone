@@ -10,15 +10,16 @@ import { Elements } from '@stripe/react-stripe-js';
 import './App.css';
 import {
   Home,
-  Header,
   Checkout,
   Login,
   Register,
   Payment,
   Orders,
+  Shop,
 } from './components';
 import { STRIPE_KEY } from './config';
 import { useStateValue } from './contextAPI/StateProvider';
+import { getProducts, getDeals } from './util';
 
 const promise = loadStripe(STRIPE_KEY);
 
@@ -26,6 +27,33 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
+    getDeals();
+    const setProducts = async () => {
+      const res = await getProducts();
+      dispatch({
+        type: 'GET_PRODUCTS',
+        products: res,
+      });
+    };
+
+    setProducts();
+    // // Get Products
+    // const products = db
+    //   .collection('users')
+    //   .doc('iQAkRAE9p9UejTQugfKGd665tBC2')
+    //   .get();
+    // console.log(products);
+
+    // //Get deals
+    // db.collection('deals')
+    //   .doc('dealsDoc')
+    //   .onSnapshot((snapshot) =>
+    //     dispatch({
+    //       type: 'GET_DEALS',
+    //       deals: snapshot,
+    //     }),
+    //   );
+
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         dispatch({
@@ -45,35 +73,20 @@ function App() {
     <Router>
       <div className='App'>
         <Switch>
-          <Route path='/login'>
-            <Login />
-          </Route>
-
-          <Route path='/register'>
-            <Register />
-          </Route>
-
-          <Route path='/checkout'>
-            <Header />
-            <Checkout />
-          </Route>
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+          <Route path='/products/:label' component={Shop} />
+          <Route path='/deals/:label' component={Shop} />
+          <Route path='/checkout' component={Checkout} />
 
           <Route path='/payment'>
-            <Header />
             <Elements stripe={promise}>
               <Payment />
             </Elements>
           </Route>
 
-          <Route path='/orders'>
-            <Header />
-            <Orders />
-          </Route>
-
-          <Route path='/'>
-            <Header />
-            <Home />
-          </Route>
+          <Route path='/orders' component={Orders} />
+          <Route path='/' component={Home} />
         </Switch>
       </div>
     </Router>
