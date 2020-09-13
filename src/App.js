@@ -16,12 +16,10 @@ import {
   Payment,
   Orders,
 } from './components';
+import { STRIPE_KEY } from './config';
 import { useStateValue } from './contextAPI/StateProvider';
 
-// put in cofig?
-const promise = loadStripe(
-  'pk_test_51HPvVHGFXBBbJ1tk3Gji6FVPcNu8958gjLwvvJ9NUPa5cHreFU4EWcueel8heO47UPYDdLdjkGn7VLNqUJRF5o2E00t75J1BgB',
-);
+const promise = loadStripe(STRIPE_KEY);
 
 function App() {
   const [{}, dispatch] = useStateValue();

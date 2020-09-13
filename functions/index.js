@@ -1,19 +1,19 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
-const stripe = require('stripe')(
-  'sk_test_51HPvVHGFXBBbJ1tkoorsJT1NSN5jgWwzOHdYudwaLOkoXbtkduRCPscT2lzCzZ9dU2FQyIBWXYTNjhVV7m8cYN1r00GT78rev2',
-);
+const config = require('./config');
+const stripe = require('stripe')(config.STRIPE_KEY);
 const axios = require('axios');
+
 const firebaseConfig = {
-  apiKey: 'AIzaSyAAlG6Cn1FK0MliVrbrfzperuatH6F8cYM',
-  authDomain: 'clone-332a8.firebaseapp.com',
-  databaseURL: 'https://clone-332a8.firebaseio.com',
-  projectId: 'clone-332a8',
-  storageBucket: 'clone-332a8.appspot.com',
-  messagingSenderId: '527332408386',
-  appId: '1:527332408386:web:66f4b2f4c90ba50d5c01db',
-  measurementId: 'G-YLXTEDRK7D',
+  apiKey: config.FIREBASE_API_KEY,
+  authDomain: config.FIREBASE_AUTH_DOMAIN,
+  databaseURL: config.FIREBASE_DATA_BASE_URL,
+  projectId: config.FIREBASE_PROJECT_ID,
+  storageBucket: config.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
+  appId: config.FIREBASE_APP_ID,
+  measurementId: config.FIREBASE_MEASUREMENT_ID,
 };
 const admin = require('firebase-admin');
 admin.initializeApp(firebaseConfig);
@@ -47,8 +47,24 @@ app.post('/payments/create', async (req, res) => {
   }
 });
 
-// - Listen command
+app.get('/search', async (req, res) => {
+  const query = req.query.search;
+  const apiUrl = `https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?category=aps&country=US&keyword=${query}`;
+  const config = {
+    heades: {
+      'x-rapidapi-host': config.SEARCH_API_HOST,
+      'x-rapidapi-key': config.SEARCH_API_KEY,
+    },
+  };
+  try {
+    const fetchResponse = await axios.get(apiUrl, config);
+    return res.status(200).json({ data: fetchResponse.data });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
 
+// - Listen command
 exports.api = functions.https.onRequest(app);
 
 // Daily getDeals function
@@ -60,9 +76,8 @@ exports.getDeals = functions.pubsub
 
     const config = {
       headers: {
-        'x-rapidapi-host': 'amazon-deals.p.rapidapi.com',
-        'x-rapidapi-key':
-          '8bbd22ba91msha8eeab97daa2e4ap14806ejsna37422d69866',
+        'x-rapidapi-host': config.DEALS_API_HOST,
+        'x-rapidapi-key': config.DEALS_API_KEY,
         useQueryString: true,
       },
     };

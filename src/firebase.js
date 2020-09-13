@@ -1,14 +1,15 @@
 import firebase from 'firebase';
+import config from './config';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAAlG6Cn1FK0MliVrbrfzperuatH6F8cYM',
-  authDomain: 'clone-332a8.firebaseapp.com',
-  databaseURL: 'https://clone-332a8.firebaseio.com',
-  projectId: 'clone-332a8',
-  storageBucket: 'clone-332a8.appspot.com',
-  messagingSenderId: '527332408386',
-  appId: '1:527332408386:web:66f4b2f4c90ba50d5c01db',
-  measurementId: 'G-YLXTEDRK7D',
+  apiKey: config.FIREBASE_API_KEY,
+  authDomain: config.FIREBASE_AUTH_DOMAIN,
+  databaseURL: config.FIREBASE_DATA_BASE_URL,
+  projectId: config.FIREBASE_PROJECT_ID,
+  storageBucket: config.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
+  appId: config.FIREBASE_APP_ID,
+  measurementId: config.FIREBASE_MEASUREMENT_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
