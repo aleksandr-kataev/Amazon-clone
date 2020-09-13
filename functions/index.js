@@ -2,21 +2,11 @@ const functions = require('firebase-functions');
 const express = require('express');
 const cors = require('cors');
 const config = require('./config');
-const stripe = require('stripe')(config.STRIPE_KEY);
+const stripe = require('stripe')(functions.config().stripe.key);
 const axios = require('axios');
 
-const firebaseConfig = {
-  apiKey: config.FIREBASE_API_KEY,
-  authDomain: config.FIREBASE_AUTH_DOMAIN,
-  databaseURL: config.FIREBASE_DATA_BASE_URL,
-  projectId: config.FIREBASE_PROJECT_ID,
-  storageBucket: config.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
-  appId: config.FIREBASE_APP_ID,
-  measurementId: config.FIREBASE_MEASUREMENT_ID,
-};
 const admin = require('firebase-admin');
-admin.initializeApp(firebaseConfig);
+admin.initializeApp();
 const db = admin.firestore();
 
 // API
@@ -52,8 +42,8 @@ app.get('/search', async (req, res) => {
   const apiUrl = `https://amazon-product-reviews-keywords.p.rapidapi.com/product/search?category=aps&country=US&keyword=${query}`;
   const config = {
     heades: {
-      'x-rapidapi-host': config.SEARCH_API_HOST,
-      'x-rapidapi-key': config.SEARCH_API_KEY,
+      'x-rapidapi-host': functions.config().search.api_host,
+      'x-rapidapi-key': functions.config().search.api_key,
     },
   };
   try {
@@ -76,8 +66,8 @@ exports.getDeals = functions.pubsub
 
     const config = {
       headers: {
-        'x-rapidapi-host': config.DEALS_API_HOST,
-        'x-rapidapi-key': config.DEALS_API_KEY,
+        'x-rapidapi-host': functions.config().deals.api_host,
+        'x-rapidapi-key': functions.config().deals.api_key,
         useQueryString: true,
       },
     };
