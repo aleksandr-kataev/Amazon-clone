@@ -3,6 +3,9 @@ import './Home.css';
 import Product from '../product/index';
 import { SubNav, Header } from '../index';
 
+// https://images-eu.ssl-images-amazon.com/images/G/02/digital/video/gateway/placement/launch/All_Or_Nothing_Tottenham_Hotspur_S1/AONT_S1_GWBleedingHero_ENG_COVIDUPDATE_XSite_3000x1200_PV_en-GB._CB406302419_.jpg
+// https://images-eu.ssl-images-amazon.com/images/G/02/AmazonMusic/2020/Marketing/012020_AMHD_Q1/UK-EN_012020_AMUHD_Q1promo_OS_GW_Hero_D_3000x1200_2X_CV2A._CB426601587_.jpg
+// https://images-eu.ssl-images-amazon.com/images/G/02/kindle/journeys/N2IxYThmYzAt/N2IxYThmYzAt-MjVlNmIyZTUt-w3000._CB407941419_.jpg
 const Home = () => {
   return (
     <>

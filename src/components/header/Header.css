@@ -3,6 +3,8 @@
   display: flex;
   align-items: center;
   background-color: #131921;
+}
+.navbar {
   position: sticky;
   top: 0;
   z-index: 100;

@@ -31,7 +31,6 @@ const Orders = () => {
   return (
     <>
       <Header />
-      <SubNav />
       <div className='orders'>
         <h1>Your Orders</h1>
         <div className='orders__ocontainer'>

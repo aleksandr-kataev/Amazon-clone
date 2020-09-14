@@ -1,6 +1,6 @@
 import React from 'react';
 import './Checkout.css';
-import { Header, SubNav } from '../index';
+import { Header } from '../index';
 import Subtotal from './subtotal/Subtotal';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import CheckoutProduct from './checkoutProduct/CheckoutProduct';
@@ -10,7 +10,6 @@ const Checkout = () => {
   return (
     <>
       <Header />
-      <SubNav />
       <div className='checkout'>
         <div className='checkout__left'>
           <img

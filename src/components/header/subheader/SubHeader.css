@@ -1,0 +1,50 @@
+.subheader {
+  height: 45px;
+  display: flex;
+  align-items: center;
+  background-color: #13263f;
+}
+
+.subheader__link {
+  color: rgb(206, 206, 206);
+  font-size: 16px;
+  padding: 6px;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: 1px solid #13263f;
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+.subheader__link:hover {
+  border: 1px solid white;
+}
+
+#subheader__deals {
+  font-weight: 700;
+}
+
+.subheader__items {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+}
+
+.subheader__delivery {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40px;
+  margin-right: 40px;
+  color: white;
+}
+
+.subheader__optionOne {
+  font-size: 12px;
+}
+
+.subheader__optionTwo {
+  font-size: 14px;
+  font-weight: 600;
+}

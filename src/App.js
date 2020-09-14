@@ -27,7 +27,7 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    getDeals();
+    //getDeals();
     const setProducts = async () => {
       const res = await getProducts();
       dispatch({

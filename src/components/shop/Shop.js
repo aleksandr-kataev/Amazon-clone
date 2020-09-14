@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStateValue } from '../../contextAPI/StateProvider';
-import { Header, SubNav } from '../index';
+import { Header } from '../index';
 import { Product } from '../index';
 import './Shop.css';
 const Shop = ({ match }) => {
@@ -15,7 +15,6 @@ const Shop = ({ match }) => {
   return (
     <>
       <Header />
-      <SubNav />
       <div className='shop'>
         {category?.products.map((product, i) => (
           <div className='shop__row' key={i}>

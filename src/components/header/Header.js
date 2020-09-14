@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
-import { SubNav } from '../index';
+import SubHeader from './subheader/SubHeader';
 
 const Header = () => {
-  const [{ basket, products }] = useStateValue();
+  const [{ basket }] = useStateValue();
   const [{ user }] = useStateValue();
 
   const handleSignOut = () => {
@@ -18,7 +18,7 @@ const Header = () => {
   };
 
   return (
-    <>
+    <div className='navbar'>
       <div className='header'>
         <Link to='/'>
           <img
@@ -69,8 +69,8 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <SubNav />
-    </>
+      <SubHeader />
+    </div>
   );
 };
 
