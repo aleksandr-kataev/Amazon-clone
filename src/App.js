@@ -15,11 +15,11 @@ import {
   Register,
   Payment,
   Orders,
-  Shop,
+  Deals,
 } from './components';
 import { STRIPE_KEY } from './config';
 import { useStateValue } from './contextAPI/StateProvider';
-import { getProducts, getDeals } from './util';
+import { getProducts } from './util';
 
 const promise = loadStripe(STRIPE_KEY);
 
@@ -75,8 +75,8 @@ function App() {
         <Switch>
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/products/:label' component={Shop} />
-          <Route path='/deals/:label' component={Shop} />
+          <Route path='/products/:label' />
+          <Route path='/deals' component={Deals} />
           <Route path='/checkout' component={Checkout} />
 
           <Route path='/payment'>

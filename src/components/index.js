@@ -5,5 +5,5 @@ export { default as Login } from './login';
 export { default as Register } from './register';
 export { default as Payment } from './payment';
 export { default as Orders } from './orders';
-export { default as Shop } from './shop';
+export { default as Deals } from './deals';
 export { default as Product } from './product';

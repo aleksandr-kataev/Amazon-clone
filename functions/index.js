@@ -73,7 +73,18 @@ exports.getDeals = functions.pubsub
     };
 
     const fetchResponse = await axios.get(apiUrl, config);
-    db.collection('deals').doc('dealsDoc').set(fetchResponse.data);
+    const products = fetchResponse.data.offers.map((category) => {
+      return category.products[
+        Math.floor(Math.random() * category.products.length)
+      ];
+    });
+
+    const obj = {
+      updated: fetchResponse.data.update_time,
+      products: products.slice(0, 10),
+    };
+
+    db.collection('deals').doc('dealsDoc').set(obj);
 
     return null;
   });
