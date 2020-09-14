@@ -16,6 +16,7 @@ import {
   Payment,
   Orders,
   Deals,
+  Products,
 } from './components';
 import { STRIPE_KEY } from './config';
 import { useStateValue } from './contextAPI/StateProvider';
@@ -27,7 +28,6 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    //getDeals();
     const setProducts = async () => {
       const res = await getProducts();
       dispatch({
@@ -37,22 +37,6 @@ function App() {
     };
 
     setProducts();
-    // // Get Products
-    // const products = db
-    //   .collection('users')
-    //   .doc('iQAkRAE9p9UejTQugfKGd665tBC2')
-    //   .get();
-    // console.log(products);
-
-    // //Get deals
-    // db.collection('deals')
-    //   .doc('dealsDoc')
-    //   .onSnapshot((snapshot) =>
-    //     dispatch({
-    //       type: 'GET_DEALS',
-    //       deals: snapshot,
-    //     }),
-    //   );
 
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
@@ -75,7 +59,7 @@ function App() {
         <Switch>
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />
-          <Route path='/products/:label' />
+          <Route path='/products/:label' component={Products} />
           <Route path='/deals' component={Deals} />
           <Route path='/checkout' component={Checkout} />
 

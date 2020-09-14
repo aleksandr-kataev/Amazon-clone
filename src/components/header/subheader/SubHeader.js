@@ -23,23 +23,56 @@ const SubHeader = () => {
         >
           Latest Deals
         </button>
-
-        {products.map((category) => {
-          return (
-            <div className='subheader__item'>
-              <button
-                className='subheader__link'
-                onClick={() => {
-                  history.push(
-                    `/products/${category.category_label}`,
-                  );
-                }}
-              >
-                {category.category_label}
-              </button>
-            </div>
-          );
-        })}
+        <div className='subheader__item'>
+          <button
+            className='subheader__link'
+            onClick={() => {
+              history.push(`/products/books`);
+            }}
+          >
+            Books
+          </button>
+        </div>
+        <div className='subheader__item'>
+          <button
+            className='subheader__link'
+            onClick={() => {
+              history.push(`/products/computer_electronics`);
+            }}
+          >
+            Computer & Electronics
+          </button>
+        </div>
+        <div className='subheader__item'>
+          <button
+            className='subheader__link'
+            onClick={() => {
+              history.push(`/products/sports_outdoors`);
+            }}
+          >
+            Sports & Outdoors
+          </button>
+        </div>
+        <div className='subheader__item'>
+          <button
+            className='subheader__link'
+            onClick={() => {
+              history.push(`/products/health_beauty`);
+            }}
+          >
+            Health & Beauty
+          </button>
+        </div>
+        <div className='subheader__item'>
+          <button
+            className='subheader__link'
+            onClick={() => {
+              history.push(`/products/children_baby`);
+            }}
+          >
+            Children & Baby
+          </button>
+        </div>
       </div>
     </div>
   );

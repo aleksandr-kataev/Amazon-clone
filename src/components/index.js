@@ -7,3 +7,4 @@ export { default as Payment } from './payment';
 export { default as Orders } from './orders';
 export { default as Deals } from './deals';
 export { default as Product } from './product';
+export { default as Products } from './products';
