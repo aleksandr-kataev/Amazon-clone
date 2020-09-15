@@ -134,7 +134,9 @@ const Payment = () => {
                       prefix={'£'}
                     />
                     <button
-                      disabled={processing || disabled || succeeded}
+                      disabled={
+                        processing || disabled || succeeded || error
+                      }
                       className='payment__button'
                     >
                       <span>

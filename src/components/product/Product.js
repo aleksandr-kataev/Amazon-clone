@@ -1,13 +1,21 @@
 import React from 'react';
+
 import './Product.css';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { recurringStar } from '../../util';
 import FullStar from '../svg/FullStar.svg';
 
-const Product = ({ id, title, image, price, rating }) => {
+const Product = ({
+  id,
+  title,
+  image,
+  price,
+  rating,
+  addItemNotification,
+}) => {
   const [{}, dispatch] = useStateValue();
 
-  const addToBasket = () => {
+  const addToBasket = (e) => {
     dispatch({
       type: 'ADD_ITEM',
       item: {
@@ -18,6 +26,7 @@ const Product = ({ id, title, image, price, rating }) => {
         image,
       },
     });
+    addItemNotification(e);
   };
   return (
     <div className='product'>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createRef } from 'react';
+import NotificationSystem from 'react-notification-system';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header, Product } from '../index';
 import { getProducts } from '../../util';
@@ -6,6 +7,18 @@ import './Products.css';
 const Products = ({ match }) => {
   const [{ products }, dispatch] = useStateValue();
   const [categoryRender, setCategoryRender] = useState(null);
+
+  const notificationSystem = createRef();
+
+  const addItemNotification = (e) => {
+    e.preventDefault();
+    const notification = notificationSystem.current;
+    notification.addNotification({
+      message: 'Item had been added',
+      level: 'success',
+      position: 'br',
+    });
+  };
 
   useEffect(() => {
     if (!products) {
@@ -32,6 +45,7 @@ const Products = ({ match }) => {
   return (
     <>
       <Header />
+      <NotificationSystem ref={notificationSystem} />
       <div className='products'>
         {categoryRender ? (
           <div className='products__products'>
@@ -45,6 +59,7 @@ const Products = ({ match }) => {
                     rating={item.rating}
                     price={item.price}
                     image={item.image}
+                    addItemNotification={addItemNotification}
                   />
                 ))}
               </div>

@@ -63,3 +63,8 @@
     height: 100px;
   }
 }
+
+.product__notification {
+  z-index: 9999;
+  position: absolute;
+}

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { createRef } from 'react';
+import NotificationSystem from 'react-notification-system';
 import './Checkout.css';
 import { Header } from '../index';
 import Subtotal from './subtotal/Subtotal';
@@ -7,9 +8,21 @@ import CheckoutProduct from './checkoutProduct/CheckoutProduct';
 
 const Checkout = () => {
   const [{ basket, user }] = useStateValue();
+
+  const notificationSystem = createRef();
+
+  const emptyBasketNotification = (e) => {
+    e.preventDefault();
+    const notification = notificationSystem.current;
+    notification.addNotification({
+      message: 'Empty basket',
+      level: 'error',
+    });
+  };
   return (
     <>
       <Header />
+      <NotificationSystem ref={notificationSystem} />
       <div className='checkout'>
         <div className='checkout__left'>
           <img
@@ -31,7 +44,9 @@ const Checkout = () => {
           </div>
         </div>
         <div className='checkout__right'>
-          <Subtotal />
+          <Subtotal
+            emptyBasketNotification={emptyBasketNotification}
+          />
         </div>
       </div>
     </>

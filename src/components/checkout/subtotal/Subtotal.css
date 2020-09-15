@@ -38,9 +38,3 @@
 .subtotal__gift > p {
   font-size: 13px;
 }
-
-.subtotal__error {
-  margin-top: 5px;
-  font-size: 12px;
-  color: rgb(184, 26, 26);
-}

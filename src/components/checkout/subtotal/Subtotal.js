@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CurrencyFormat from 'react-currency-format';
 import { useHistory } from 'react-router-dom';
 import './Subtotal.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { getBasketTotal } from '../../../contextAPI/reducer';
 
-const Subtotal = () => {
+const Subtotal = ({ emptyBasketNotification }) => {
   const history = useHistory();
   const [{ basket }] = useStateValue();
-  const [error, setError] = useState(null);
 
-  const handleCheckout = () => {
+  const handleCheckout = (e) => {
     if (basket.length < 1) {
-      setError('Empty basket');
+      emptyBasketNotification(e);
+      return;
     }
+    history.push('/payment');
   };
 
   return (
@@ -29,7 +30,6 @@ const Subtotal = () => {
               <input type='checkbox' />{' '}
               <p>This order contains gift</p>
             </div>
-            <span className='subtotal__error'>{error}</span>
           </>
         )}
         decimalScale={2}
