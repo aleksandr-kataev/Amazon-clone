@@ -59,7 +59,8 @@ exports.api = functions.https.onRequest(app);
 
 // Daily getDeals function
 exports.getDeals = functions.pubsub
-  .schedule('45 20 * * *')
+  .schedule('30 0 * * *')
+  .timeZone('Europe/Guernsey')
   .onRun(async (context) => {
     const apiUrl =
       'https://amazon-deals.p.rapidapi.com/amazon-offers/all';

@@ -1,10 +1,11 @@
 import React from 'react';
 import './Product.css';
 import { useStateValue } from '../../contextAPI/StateProvider';
+import { recurringStar } from '../../util';
+import FullStar from '../svg/FullStar.svg';
 
 const Product = ({ id, title, image, price, rating }) => {
   const [{}, dispatch] = useStateValue();
-  console.log(image);
 
   const addToBasket = () => {
     dispatch({
@@ -21,17 +22,38 @@ const Product = ({ id, title, image, price, rating }) => {
   return (
     <div className='product'>
       <div className='product__info'>
-        <p>{title}</p>
-        <p className='product__price'>
-          <small>£</small>
-          <strong>{price}</strong>
-        </p>
+        <p>{title.substring(0, 130)}</p>
+        <div className='product__price'>
+          <div className='product__priceContainer'>
+            <span className='product__recurringPrice'>£</span>
+          </div>
+          <div className='product__priceContainer'>
+            <span className='product__wholePrice'>
+              {price.toString().split('.')[0]}
+            </span>
+          </div>
+          <div className='product__priceContainer'>
+            <span className='product__recurringPrice'>
+              {'.'}
+              {price.toString().split('.')[1] === undefined
+                ? 0
+                : price.toString().split('.')[1]}
+            </span>
+          </div>
+        </div>
         <div className='product__rating'>
           {Array(Math.trunc(rating))
             .fill()
             .map((_, i) => (
-              <p key={i}>⭐</p>
+              <div className='product__svgContainer'>
+                <img src={FullStar} alt='rating' />
+              </div>
             ))}
+          {recurringStar(rating) === null ? null : (
+            <div className='product__svgContainer'>
+              <img src={recurringStar(rating)} alt='rating' />
+            </div>
+          )}
         </div>
       </div>
       <img src={image} alt='product' />
@@ -42,3 +64,10 @@ const Product = ({ id, title, image, price, rating }) => {
 };
 
 export default Product;
+
+/**
+ * 2-3 third
+ * 4-6 half
+ * 7-8 2 thirds
+ * 0 full
+ */

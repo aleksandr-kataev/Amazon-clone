@@ -1,6 +1,8 @@
 import React from 'react';
 import './CheckoutProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
+import { recurringStar } from '../../../util';
+import FullStar from '../../svg/FullStar.svg';
 
 const CheckoutProduct = ({ item, hideRemove }) => {
   const { id, title, price, image, rating } = item;
@@ -22,17 +24,40 @@ const CheckoutProduct = ({ item, hideRemove }) => {
       />
 
       <div className='checkoutProduct__info'>
-        <p className='checkoutProduct__title'>{title}</p>
-        <p className='checkoutProduct__price'>
-          <small>£</small>
-          <strong>{price}</strong>
+        <p className='checkoutProduct__title'>
+          {title.substring(0, 130)}
         </p>
-        <div className='checkoutProduct__rating'>
-          {Array(rating)
+        <div className='product__price'>
+          <div className='product__priceContainer'>
+            <span className='product__recurringPrice'>£</span>
+          </div>
+          <div className='product__priceContainer'>
+            <span className='product__wholePrice'>
+              {price.toString().split('.')[0]}
+            </span>
+          </div>
+          <div className='product__priceContainer'>
+            <span className='product__recurringPrice'>
+              {'.'}
+              {price.toString().split('.')[1] === undefined
+                ? 0
+                : price.toString().split('.')[1]}
+            </span>
+          </div>
+        </div>
+        <div className='product__rating'>
+          {Array(Math.trunc(rating))
             .fill()
             .map((_, i) => (
-              <p key={i}>⭐</p>
+              <div className='product__svgContainer'>
+                <img src={FullStar} alt='rating' />
+              </div>
             ))}
+          {recurringStar(rating) === null ? null : (
+            <div className='product__svgContainer'>
+              <img src={recurringStar(rating)} alt='rating' />
+            </div>
+          )}
         </div>
         {!hideRemove && (
           <button onClick={removeFromBasket}>
