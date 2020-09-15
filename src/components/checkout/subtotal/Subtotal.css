@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 300px;
-  height: 100px;
+  height: 120px;
   padding: 20px;
   background-color: #f3f3f3;
   border: 1px solid #dddddd;
@@ -13,6 +13,7 @@
 .subtotal__gift {
   display: flex;
   align-items: center;
+  margin-top: 3px;
 }
 
 .subtotal > button {
@@ -36,4 +37,10 @@
 
 .subtotal__gift > p {
   font-size: 13px;
+}
+
+.subtotal__error {
+  margin-top: 5px;
+  font-size: 12px;
+  color: rgb(184, 26, 26);
 }

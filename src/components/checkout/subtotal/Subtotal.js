@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CurrencyFormat from 'react-currency-format';
 import { useHistory } from 'react-router-dom';
 import './Subtotal.css';
@@ -8,6 +8,13 @@ import { getBasketTotal } from '../../../contextAPI/reducer';
 const Subtotal = () => {
   const history = useHistory();
   const [{ basket }] = useStateValue();
+  const [error, setError] = useState(null);
+
+  const handleCheckout = () => {
+    if (basket.length < 1) {
+      setError('Empty basket');
+    }
+  };
 
   return (
     <div className='subtotal'>
@@ -22,6 +29,7 @@ const Subtotal = () => {
               <input type='checkbox' />{' '}
               <p>This order contains gift</p>
             </div>
+            <span className='subtotal__error'>{error}</span>
           </>
         )}
         decimalScale={2}
@@ -31,9 +39,7 @@ const Subtotal = () => {
         prefix={'£'}
       />
 
-      <button onClick={(e) => history.push('/payment')}>
-        Proceed to Checkout
-      </button>
+      <button onClick={handleCheckout}>Proceed to Checkout</button>
     </div>
   );
 };

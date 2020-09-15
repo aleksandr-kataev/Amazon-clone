@@ -49,7 +49,7 @@ const Product = ({ id, title, image, price, rating }) => {
                 <img src={FullStar} alt='rating' />
               </div>
             ))}
-          {recurringStar(rating) === null ? null : (
+          {recurringStar(rating) && (
             <div className='product__svgContainer'>
               <img src={recurringStar(rating)} alt='rating' />
             </div>
@@ -64,10 +64,3 @@ const Product = ({ id, title, image, price, rating }) => {
 };
 
 export default Product;
-
-/**
- * 2-3 third
- * 4-6 half
- * 7-8 2 thirds
- * 0 full
- */

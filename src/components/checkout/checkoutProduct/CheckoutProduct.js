@@ -53,7 +53,7 @@ const CheckoutProduct = ({ item, hideRemove }) => {
                 <img src={FullStar} alt='rating' />
               </div>
             ))}
-          {recurringStar(rating) === null ? null : (
+          {recurringStar(rating) && (
             <div className='product__svgContainer'>
               <img src={recurringStar(rating)} alt='rating' />
             </div>

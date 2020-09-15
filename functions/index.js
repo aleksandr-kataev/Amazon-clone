@@ -54,6 +54,10 @@ app.get('/search', async (req, res) => {
   }
 });
 
+const round = (value, decimals) => {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+};
+
 // - Listen command
 exports.api = functions.https.onRequest(app);
 
@@ -80,9 +84,18 @@ exports.getDeals = functions.pubsub
       ];
     });
 
+    const productsToGB = products.map((product) => {
+      return {
+        ...product,
+        reviewRating: round(product.reviewRating, 1),
+        normalPrice: round(product.normalPrice * 0.78, 2),
+        offerPrice: round(product.offerPrice * 0.78, 2),
+      };
+    });
+
     const obj = {
       updated: fetchResponse.data.update_time,
-      products: products.slice(0, 10),
+      products: productsToGB.slice(0, 10),
     };
 
     db.collection('deals').doc('dealsDoc').set(obj);
