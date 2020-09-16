@@ -19,8 +19,14 @@ export const getDeals = async () => {
   const ref = db.collection('deals').doc('dealsDoc');
   const res = await ref.get();
   const data = res.data();
-
   return data;
+};
+
+export const getFeatured = async () => {
+  const ref = db.collection('featured').doc('featuredDoc');
+  const res = await ref.get();
+  const data = res.data();
+  return data.products;
 };
 
 export const recurringStar = (rating) => {

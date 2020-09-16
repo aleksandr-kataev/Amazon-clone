@@ -1,11 +1,13 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
+import { useSpring, animated as a } from 'react-spring';
 import { Header, Product } from '../index';
 import { getDeals, addItemNotification } from '../../util';
 import './Deals.css';
 const Deals = () => {
   const [dealsRender, setDealsRender] = useState(null);
   const notificationSystem = createRef();
+  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const handleNotification = (e) => {
     addItemNotification(e, notificationSystem);
@@ -29,23 +31,27 @@ const Deals = () => {
   return (
     <>
       <Header />
-      <NotificationSystem ref={notificationSystem} />
-      <div className='deals'>
-        {dealsRender?.products.map((product, i) => (
-          <div className='deals__row' key={i}>
-            {product.map((item) => (
-              <Product
-                id={item.id}
-                title={item.description}
-                rating={item.reviewRating}
-                price={item.offerPrice}
-                image={item.imageUrl}
-                addItemNotification={handleNotification}
-              />
+      <a.div style={fadeProps}>
+        <NotificationSystem ref={notificationSystem} />
+        {dealsRender && (
+          <div className='deals'>
+            {dealsRender?.products.map((product, i) => (
+              <div className='deals__row' key={i}>
+                {product.map((item) => (
+                  <Product
+                    id={item.id}
+                    title={item.description}
+                    rating={item.reviewRating}
+                    price={item.offerPrice}
+                    image={item.imageUrl}
+                    addItemNotification={handleNotification}
+                  />
+                ))}
+              </div>
             ))}
           </div>
-        ))}
-      </div>
+        )}
+      </a.div>
     </>
   );
 };

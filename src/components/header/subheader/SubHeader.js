@@ -1,12 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useStateValue } from '../../../contextAPI/StateProvider';
-
 import './SubHeader.css';
 
 const SubHeader = () => {
   const history = useHistory();
-  const [{ products }] = useStateValue();
   return (
     <div className='subheader'>
       <div className='subheader__delivery'>

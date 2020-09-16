@@ -1,5 +1,6 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
+import { useSpring, animated as a } from 'react-spring';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header, Product } from '../index';
 import { getProducts, addItemNotification } from '../../util';
@@ -9,6 +10,7 @@ const Products = ({ match }) => {
   const [categoryRender, setCategoryRender] = useState(null);
 
   const notificationSystem = createRef();
+  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   const handleNotification = (e) => {
     addItemNotification(e, notificationSystem);
@@ -39,28 +41,30 @@ const Products = ({ match }) => {
   return (
     <>
       <Header />
-      <NotificationSystem ref={notificationSystem} />
-      <div className='products'>
-        {categoryRender ? (
-          <div className='products__products'>
-            {console.log(categoryRender)}
-            {categoryRender?.map((product, i) => (
-              <div className='products__row' key={i}>
-                {product.map((item) => (
-                  <Product
-                    id={item.id}
-                    title={item.title}
-                    rating={item.rating}
-                    price={item.price}
-                    image={item.image}
-                    addItemNotification={handleNotification}
-                  />
-                ))}
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
+      <a.div style={fadeProps}>
+        <NotificationSystem ref={notificationSystem} />
+        <div className='products'>
+          {categoryRender ? (
+            <div className='products__products'>
+              {console.log(categoryRender)}
+              {categoryRender?.map((product, i) => (
+                <div className='products__row' key={i}>
+                  {product.map((item) => (
+                    <Product
+                      id={item.id}
+                      title={item.title}
+                      rating={item.rating}
+                      price={item.price}
+                      image={item.image}
+                      addItemNotification={handleNotification}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </div>
+      </a.div>
     </>
   );
 };

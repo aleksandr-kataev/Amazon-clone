@@ -61,7 +61,64 @@ const round = (value, decimals) => {
 // - Listen command
 exports.api = functions.https.onRequest(app);
 
-// Daily getDeals function
+// Get featured product command
+exports.getFeatured = functions.pubsub
+  .schedule('35 0 * * *')
+  .timeZone('Europe/Guernsey')
+  .onRun(async (context) => {
+    const ref = db.collection('products');
+    const res = await ref.get();
+    const products = [];
+
+    res.forEach((doc) => {
+      products.push(doc.data());
+    });
+
+    // Filter out the category and select n random elements
+    // 4 from computer_electronics
+    // 2 from sports_outdoors
+    // 2 from books
+    // 2 from health_beauty
+    // Combine in array and shuffle
+    // Returns 10 random products from the above categories
+
+    const electronics = products
+      .filter(
+        (product) =>
+          product.category_label === 'computer_electronics',
+      )
+      .sort(() => 0.5 - Math.random)
+      .slice(0, 4);
+
+    const sports = products
+      .filter(
+        (product) => product.category_label === 'sports_outdoors',
+      )
+      .sort(() => 0.5 - Math.random)
+      .slice(0, 2);
+
+    const books = products
+      .filter((product) => product.category_label === 'books')
+      .sort(() => 0.5 - Math.random)
+      .slice(0, 2);
+
+    const health = products
+      .filter((product) => product.category_label === 'health_beauty')
+      .sort(() => 0.5 - Math.random)
+      .slice(0, 2);
+
+    const obj = {
+      products: [...electronics, ...sports, ...books, ...health].sort(
+        () => Math.random() - 0.5,
+      ),
+    };
+
+    db.collection('featured').doc('featuredDoc').set(obj);
+
+    return null;
+  });
+
+// Daily getDeals command
 exports.getDeals = functions.pubsub
   .schedule('30 0 * * *')
   .timeZone('Europe/Guernsey')

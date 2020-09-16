@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useSpring, animated as a } from 'react-spring';
 import { db } from '../../firebase';
 import Order from './order/Order';
-import { SubNav, Header } from '../index';
+import { Header } from '../index';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import './Orders.css';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const [{ basket, user }, dispatch] = useStateValue();
+  const [{ user }] = useStateValue();
+  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
 
   useEffect(() => {
     if (user) {
@@ -31,14 +33,16 @@ const Orders = () => {
   return (
     <>
       <Header />
-      <div className='orders'>
-        <h1>Your Orders</h1>
-        <div className='orders__ocontainer'>
-          {orders?.map((order) => (
-            <Order order={order} />
-          ))}
+      <a.div style={fadeProps}>
+        <div className='orders'>
+          <h1>Your Orders</h1>
+          <div className='orders__ocontainer'>
+            {orders?.map((order) => (
+              <Order order={order} />
+            ))}
+          </div>
         </div>
-      </div>
+      </a.div>
     </>
   );
 };
