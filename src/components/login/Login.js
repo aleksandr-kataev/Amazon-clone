@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import './Login.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useSpring, animated as a } from 'react-spring';
 import { auth } from '../../firebase';
+import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Login = () => {
+  const [{ user }] = useStateValue();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
-
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const history = useHistory();
 
   const handleSignIn = (e) => {
@@ -21,13 +24,17 @@ const Login = () => {
     }
     auth
       .signInWithEmailAndPassword(email, password)
-      .then((auth) => {
-        history.push('/');
+      .then(() => {
+        setRedirectToReferrer(true);
       })
       .catch((error) => {
-        console.warn(error);
+        setError(error.message);
       });
   };
+
+  if (redirectToReferrer === true || user) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>

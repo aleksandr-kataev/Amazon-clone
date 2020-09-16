@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { useSpring, animated as a } from 'react-spring';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import './Register.css';
 import { auth } from '../../firebase';
+import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Register = () => {
+  const [{ user }] = useStateValue();
   const [email, setEmail] = useState('');
   const [confEmail, setConfEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [error, setError] = useState('');
-
-  const history = useHistory();
+  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
   const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const history = useHistory();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -33,15 +35,18 @@ const Register = () => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((auth) => {
-        console.log(auth);
         if (auth) {
-          history.push('/');
+          setRedirectToReferrer(true);
         }
       })
       .catch((err) => {
         setError(err.message);
       });
   };
+
+  if (redirectToReferrer === true || user) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>
@@ -92,7 +97,7 @@ const Register = () => {
                 className='register__registerButton'
                 onClick={handleRegister}
               >
-                Sign in
+                Register
               </button>
 
               <p className='register__agreement'>
