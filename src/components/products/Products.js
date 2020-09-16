@@ -2,7 +2,8 @@ import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
 import { useStateValue } from '../../contextAPI/StateProvider';
-import { Header, Product } from '../index';
+import { Header } from '../index';
+import Product from '../product/Product';
 import { getProducts, addItemNotification } from '../../util';
 import './Products.css';
 const Products = ({ match }) => {
@@ -57,6 +58,7 @@ const Products = ({ match }) => {
                       price={item.price}
                       image={item.image}
                       addItemNotification={handleNotification}
+                      deal={false}
                     />
                   ))}
                 </div>

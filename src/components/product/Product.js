@@ -28,6 +28,7 @@ const Product = ({
     });
     addItemNotification(e);
   };
+
   return (
     <div className='product'>
       <div className='product__info'>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
-import { Header, Product } from '../index';
+import { Header } from '../index';
+import DealProduct from '../product/dealProduct/DealProduct';
 import { getDeals, addItemNotification } from '../../util';
 import './Deals.css';
 const Deals = () => {
@@ -38,11 +39,12 @@ const Deals = () => {
             {dealsRender?.products.map((product, i) => (
               <div className='deals__row' key={i}>
                 {product.map((item) => (
-                  <Product
+                  <DealProduct
                     id={item.id}
                     title={item.description}
                     rating={item.reviewRating}
-                    price={item.offerPrice}
+                    offerPrice={item.offerPrice}
+                    normalPrice={item.normalPrice}
                     image={item.imageUrl}
                     addItemNotification={handleNotification}
                   />

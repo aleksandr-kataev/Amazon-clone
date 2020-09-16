@@ -7,7 +7,7 @@ import {
 import NotificationSystem from 'react-notification-system';
 import { getFeatured, addItemNotification } from '../../util';
 import './Home.css';
-import Product from '../product/index';
+import Product from '../product/Product';
 import { Header } from '../index';
 
 const Home = () => {
@@ -92,6 +92,7 @@ const Home = () => {
                       price={item.price}
                       image={item.image}
                       addItemNotification={handleNotification}
+                      deal={false}
                     />
                   ))}
                 </div>
