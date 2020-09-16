@@ -1,20 +1,14 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { Header, Product } from '../index';
-import { getDeals } from '../../util';
+import { getDeals, addItemNotification } from '../../util';
 import './Deals.css';
 const Deals = () => {
   const [dealsRender, setDealsRender] = useState(null);
   const notificationSystem = createRef();
 
-  const addItemNotification = (e) => {
-    e.preventDefault();
-    const notification = notificationSystem.current;
-    notification.addNotification({
-      message: 'Item had been added',
-      level: 'success',
-      position: 'br',
-    });
+  const handleNotification = (e) => {
+    addItemNotification(e, notificationSystem);
   };
 
   useEffect(() => {
@@ -46,7 +40,7 @@ const Deals = () => {
                 rating={item.reviewRating}
                 price={item.offerPrice}
                 image={item.imageUrl}
-                addItemNotification={addItemNotification}
+                addItemNotification={handleNotification}
               />
             ))}
           </div>

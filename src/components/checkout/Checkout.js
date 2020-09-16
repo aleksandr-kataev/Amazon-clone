@@ -3,6 +3,7 @@ import NotificationSystem from 'react-notification-system';
 import './Checkout.css';
 import { Header } from '../index';
 import Subtotal from './subtotal/Subtotal';
+import { emptyBasketNotification } from '../../util';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import CheckoutProduct from './checkoutProduct/CheckoutProduct';
 
@@ -11,14 +12,10 @@ const Checkout = () => {
 
   const notificationSystem = createRef();
 
-  const emptyBasketNotification = (e) => {
-    e.preventDefault();
-    const notification = notificationSystem.current;
-    notification.addNotification({
-      message: 'Empty basket',
-      level: 'error',
-    });
+  const handlNotification = (e) => {
+    emptyBasketNotification(e, notificationSystem);
   };
+
   return (
     <>
       <Header />
@@ -44,9 +41,7 @@ const Checkout = () => {
           </div>
         </div>
         <div className='checkout__right'>
-          <Subtotal
-            emptyBasketNotification={emptyBasketNotification}
-          />
+          <Subtotal emptyBasketNotification={handlNotification} />
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@ import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header, Product } from '../index';
-import { getProducts } from '../../util';
+import { getProducts, addItemNotification } from '../../util';
 import './Products.css';
 const Products = ({ match }) => {
   const [{ products }, dispatch] = useStateValue();
@@ -10,14 +10,8 @@ const Products = ({ match }) => {
 
   const notificationSystem = createRef();
 
-  const addItemNotification = (e) => {
-    e.preventDefault();
-    const notification = notificationSystem.current;
-    notification.addNotification({
-      message: 'Item had been added',
-      level: 'success',
-      position: 'br',
-    });
+  const handleNotification = (e) => {
+    addItemNotification(e, notificationSystem);
   };
 
   useEffect(() => {
@@ -59,7 +53,7 @@ const Products = ({ match }) => {
                     rating={item.rating}
                     price={item.price}
                     image={item.image}
-                    addItemNotification={addItemNotification}
+                    addItemNotification={handleNotification}
                   />
                 ))}
               </div>

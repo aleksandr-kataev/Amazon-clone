@@ -1,4 +1,8 @@
-.home__container {
+body {
+  overflow-x: hidden;
+}
+
+.home__slideShow {
   display: flex;
   justify-content: center;
   margin-left: auto;
@@ -13,10 +17,14 @@
   margin-right: 15px;
 }
 
+.home__container {
+  margin-top: 15%;
+}
+
 .home__image {
-  width: 100%;
+  width: 80%;
+  max-height: 600px;
   z-index: -1;
-  margin-bottom: -400px;
   mask-image: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 1),

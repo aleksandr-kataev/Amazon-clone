@@ -42,3 +42,22 @@ export const recurringStar = (rating) => {
     return TwoThirdsStar;
   }
 };
+
+export const addItemNotification = (e, notificationSystem) => {
+  e.preventDefault();
+  const notification = notificationSystem.current;
+  notification.addNotification({
+    message: 'Item has been added',
+    level: 'success',
+    position: 'br',
+  });
+};
+
+export const emptyBasketNotification = (e, notificationSystem) => {
+  e.preventDefault();
+  const notification = notificationSystem.current;
+  notification.addNotification({
+    message: 'Empty basket',
+    level: 'error',
+  });
+};

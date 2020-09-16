@@ -6,7 +6,7 @@ import FullStar from '../../svg/FullStar.svg';
 
 const CheckoutProduct = ({ item, hideRemove }) => {
   const { id, title, price, image, rating } = item;
-  const [state, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
     dispatch({
