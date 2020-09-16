@@ -1,5 +1,3 @@
-import { returnTrue } from 'react-currency-format/lib/utils';
-
 export const initialState = {
   basket: [],
   user: null,
@@ -11,7 +9,10 @@ export const initialState = {
 
 // Total price selector
 export const getBasketTotal = (basket) =>
-  basket?.reduce((amount, item) => item.price + amount, 0);
+  basket?.reduce((amount, item) => {
+    const itemPrice = item.offerPrice ? item.offerPrice : item.price;
+    return itemPrice + amount;
+  }, 0);
 
 const reducer = (state, action) => {
   console.log(action);

@@ -36,13 +36,18 @@ const Checkout = () => {
               <h2 className='checkout__title'>
                 Your shopping Basket
               </h2>
-              {basket.map((item, i) => (
-                <CheckoutProduct
-                  key={i}
-                  item={item}
-                  hideRemove={false}
-                />
-              ))}
+              {basket.map((item, i) => {
+                const itemPrice = item.offerPrice
+                  ? item.offerPrice
+                  : item.price;
+                return (
+                  <CheckoutProduct
+                    key={i}
+                    item={{ ...item, price: itemPrice }}
+                    hideRemove={false}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className='checkout__right'>
