@@ -8,6 +8,7 @@
 .login__logo {
   margin-top: 20px;
   margin-bottom: 20px;
+  -o-object-fit: contain;
   object-fit: contain;
   width: 100px;
   margin-right: auto;
@@ -16,6 +17,8 @@
 
 .login__cnt {
   width: 300px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   display: flex;
   flex-direction: column;

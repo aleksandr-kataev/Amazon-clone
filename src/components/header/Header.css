@@ -9,6 +9,7 @@ a {
   background-color: #131921;
 }
 .navbar {
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -16,6 +17,7 @@ a {
 
 .header__logo {
   width: 100px;
+  -o-object-fit: contain;
   object-fit: contain;
   margin: 0 20px;
   margin-top: 18px;
