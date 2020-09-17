@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Amazon Ember';
+  src: url(./artifacts/font/Amazon-Ember-Regular.woff) format('woff'),
+    url(./artifacts/font/Amazon-Ember-Regular.ttf) format('ttf'),
+    url(./artifacts/font/Amazon-Ember-Regular.otf) format('otf');
+}
+
 * {
   margin: 0;
   padding: 0;

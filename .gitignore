@@ -16,6 +16,8 @@ firebase.json
 # production
 /build
 
+#artifacts
+/src/artifacts
 
 .env
 

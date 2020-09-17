@@ -97,7 +97,11 @@ const Payment = () => {
             <div className='payment__container'>
               <h1>
                 Checkout (
-                <Link to='/checkout'>{basket?.length} items</Link>)
+                <Link to='/checkout'>
+                  {basket?.length}{' '}
+                  {basket.length < 2 ? 'item' : 'items'}
+                </Link>
+                )
               </h1>
               <div className='payment__section'>
                 <div className='payment__title'>

@@ -23,7 +23,11 @@ const Subtotal = ({ emptyBasketNotification }) => {
         renderText={(value) => (
           <>
             <p>
-              Subtotal ({basket.length} items):{' '}
+              {basket.length > 0
+                ? `Subtotal ${
+                    basket.length < 2 ? 'item: ' : 'items: '
+                  }`
+                : `Empty Basket `}
               <strong>{value}</strong>
             </p>
             <div className='subtotal__gift'>

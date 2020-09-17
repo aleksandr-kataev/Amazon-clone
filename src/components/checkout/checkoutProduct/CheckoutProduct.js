@@ -2,7 +2,7 @@ import React from 'react';
 import './CheckoutProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { recurringStar } from '../../../util';
-import FullStar from '../../svg/FullStar.svg';
+import FullStar from '../../../artifacts/svg/FullStar.svg';
 
 const CheckoutProduct = ({ item, hideRemove }) => {
   const { id, title, price, image, rating } = item;

@@ -1,7 +1,7 @@
 import { db } from './firebase';
-import HalfStar from './components/svg/ThirdStar.svg';
-import ThirdStar from './components/svg/ThirdStar.svg';
-import TwoThirdsStar from './components/svg/TwoThirdsStar.svg';
+import HalfStar from './artifacts/svg/ThirdStar.svg';
+import ThirdStar from './artifacts/svg/ThirdStar.svg';
+import TwoThirdsStar from './artifacts/svg/TwoThirdsStar.svg';
 
 export const getProducts = async () => {
   const ref = db.collection('products');
