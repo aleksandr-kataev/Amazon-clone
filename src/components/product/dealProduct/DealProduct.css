@@ -22,6 +22,12 @@
   margin-bottom: 15px;
 }
 
+.product__normalPrice {
+  margin-left: 0.5%;
+  text-decoration: line-through;
+  font-size: 12px;
+}
+
 .dealProduct__price {
   display: flex;
   flex-flow: row nowrap;
@@ -69,10 +75,4 @@
 .dealProduct__notification {
   z-index: 9999;
   position: absolute;
-}
-
-.product__normalPrice {
-  margin-left: 0.5%;
-  text-decoration: line-through;
-  font-size: 12px;
 }

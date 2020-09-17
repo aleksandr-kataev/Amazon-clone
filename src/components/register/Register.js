@@ -7,13 +7,19 @@ import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Register = () => {
   const [{ user }] = useStateValue();
+
+  //Form states
   const [email, setEmail] = useState('');
   const [confEmail, setConfEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [error, setError] = useState('');
+
+  //Redirect if logged in
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
   const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+
   const history = useHistory();
 
   const handleRegister = (e) => {

@@ -17,15 +17,17 @@ import { getBasketTotal } from '../../contextAPI/reducer';
 
 const Payment = () => {
   const [{ user, basket }, dispatch] = useStateValue();
+
   const history = useHistory();
+
   const stripe = useStripe();
+  const [clientSecret, setClientSecret] = useState(true);
   const elements = useElements();
 
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState('');
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState(true);
 
   const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
 
@@ -109,7 +111,7 @@ const Payment = () => {
                 </div>
                 <div className='payment__address'>
                   <p>{user?.email}</p>
-                  <p>123 React drive</p>
+                  <p>123 React street</p>
                   <p>London, UK</p>
                 </div>
               </div>

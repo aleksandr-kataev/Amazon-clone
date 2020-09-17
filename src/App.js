@@ -7,7 +7,6 @@ import {
 
 import PrivateRoute from './PrivateRoute';
 import { auth } from './firebase';
-
 import './App.css';
 import {
   Home,
@@ -19,7 +18,6 @@ import {
   Deals,
   Products,
 } from './components';
-
 import { useStateValue } from './contextAPI/StateProvider';
 import { getProducts } from './util';
 
@@ -34,7 +32,6 @@ function App() {
         products: res,
       });
     };
-
     setProducts();
 
     auth.onAuthStateChanged((authUser) => {
@@ -50,19 +47,19 @@ function App() {
         });
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>
       <div className='App'>
         <Switch>
-          <Route path='/login' component={Login} />
-          <Route path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <Route exact path='/register' component={Register} />
           <Route path='/products/:label' component={Products} />
-          <Route path='/deals' component={Deals} />
-          <Route path='/checkout' component={Checkout} />
-          <PrivateRoute path='/payment' component={Stripe} />
-          <PrivateRoute path='/orders' component={Orders} />
+          <Route exact path='/deals' component={Deals} />
+          <Route exact path='/checkout' component={Checkout} />
+          <PrivateRoute exact path='/payment' component={Stripe} />
+          <PrivateRoute exact path='/orders' component={Orders} />
           <Route path='/' component={Home} />
         </Switch>
       </div>

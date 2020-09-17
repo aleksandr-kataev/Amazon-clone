@@ -1,11 +1,13 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
+
+import './Products.css';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header } from '../index';
 import Product from '../product/Product';
 import { getProducts, addItemNotification } from '../../util';
-import './Products.css';
+
 const Products = ({ match }) => {
   const [{ products }, dispatch] = useStateValue();
   const [categoryRender, setCategoryRender] = useState(null);
@@ -37,7 +39,7 @@ const Products = ({ match }) => {
       category.slice(3, 7),
       category.slice(7, 10),
     ]);
-  }, [match]);
+  }, [match, dispatch, products]);
 
   return (
     <>
@@ -46,8 +48,7 @@ const Products = ({ match }) => {
         <NotificationSystem ref={notificationSystem} />
         <div className='products'>
           {categoryRender ? (
-            <div className='products__products'>
-              {console.log(categoryRender)}
+            <>
               {categoryRender?.map((product, i) => (
                 <div className='products__row' key={i}>
                   {product.map((item) => (
@@ -63,7 +64,7 @@ const Products = ({ match }) => {
                   ))}
                 </div>
               ))}
-            </div>
+            </>
           ) : null}
         </div>
       </a.div>

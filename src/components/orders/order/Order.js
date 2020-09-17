@@ -1,20 +1,18 @@
 import React from 'react';
 import moment from 'moment';
 import CurrencyFormat from 'react-currency-format';
-import CheckoutProduct from '../../checkout/checkoutProduct/CheckoutProduct';
 import './Order.css';
+import CheckoutProduct from '../../checkout/checkoutProduct/CheckoutProduct';
 
 const Order = ({ order }) => {
   return (
     <div className='order'>
-      <div className='order__title'>
-        <h2>Order</h2>
-        <p>
-          {moment
-            .unix(order.data.created)
-            .format('MMMM Do YYYY, h:mma')}
-        </p>
-      </div>
+      <h2>Order</h2>
+      <p>
+        {moment
+          .unix(order.data.created)
+          .format('MMMM Do YYYY, h:mma')}
+      </p>
 
       <div className='order__items'>
         {order.data.basket?.map((item) => (

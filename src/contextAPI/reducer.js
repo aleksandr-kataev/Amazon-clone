@@ -5,8 +5,6 @@ export const initialState = {
   deals: [],
 };
 
-// payload insterad of item
-
 // Total price selector
 export const getBasketTotal = (basket) =>
   basket?.reduce((amount, item) => {

@@ -5,8 +5,8 @@ import {
   animated as a,
 } from 'react-spring';
 import NotificationSystem from 'react-notification-system';
-import { getFeatured, addItemNotification } from '../../util';
 import './Home.css';
+import { getFeatured, addItemNotification } from '../../util';
 import Product from '../product/Product';
 import { Header } from '../index';
 

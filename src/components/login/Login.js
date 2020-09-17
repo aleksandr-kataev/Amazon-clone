@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import './Login.css';
 import { Link, useHistory } from 'react-router-dom';
 import { useSpring, animated as a } from 'react-spring';
+import './Login.css';
 import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
 
 const Login = () => {
   const [{ user }] = useStateValue();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
   const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
   const history = useHistory();
 
   const handleSignIn = (e) => {

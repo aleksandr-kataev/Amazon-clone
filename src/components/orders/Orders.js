@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSpring, animated as a } from 'react-spring';
+import './Orders.css';
 import { db } from '../../firebase';
 import Order from './order/Order';
 import { Header } from '../index';
 import { useStateValue } from '../../contextAPI/StateProvider';
-import './Orders.css';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);

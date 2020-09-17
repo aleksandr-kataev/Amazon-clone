@@ -1,6 +1,7 @@
 import React, { createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
+
 import './Checkout.css';
 import { Header } from '../index';
 import Subtotal from './subtotal/Subtotal';

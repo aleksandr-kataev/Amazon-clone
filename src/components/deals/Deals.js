@@ -1,10 +1,12 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
+
+import './Deals.css';
 import { Header } from '../index';
 import DealProduct from '../product/dealProduct/DealProduct';
 import { getDeals, addItemNotification } from '../../util';
-import './Deals.css';
+
 const Deals = () => {
   const [dealsRender, setDealsRender] = useState(null);
   const notificationSystem = createRef();

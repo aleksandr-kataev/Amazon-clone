@@ -20,6 +20,7 @@ body {
 
 .home__container {
   margin-top: 15%;
+  position: absolute;
 }
 
 .home__image {

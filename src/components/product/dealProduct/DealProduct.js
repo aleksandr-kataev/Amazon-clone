@@ -2,7 +2,7 @@ import React from 'react';
 import './DealProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { recurringStar } from '../../../util';
-import FullStar from '../../../artifacts/svg/FullStar.svg';
+import { FullStar } from '../../../artifacts/svg/index';
 
 const DealProduct = ({
   id,
