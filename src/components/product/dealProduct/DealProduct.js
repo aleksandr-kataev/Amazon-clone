@@ -21,7 +21,7 @@ const DealProduct = ({
       item: {
         id,
         title,
-        offerPrice,
+        price: offerPrice,
         rating,
         image,
       },

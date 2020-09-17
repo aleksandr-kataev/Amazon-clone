@@ -114,9 +114,17 @@ const Payment = () => {
                   <h3>Review items and delivery</h3>
                 </div>
                 <div className='payment__items'>
-                  {basket.map((item) => (
-                    <CheckoutProduct item={item} hideRemove={true} />
-                  ))}
+                  {basket.map((item) => {
+                    const itemPrice = item.offerPrice
+                      ? item.offerPrice
+                      : item.price;
+                    return (
+                      <CheckoutProduct
+                        item={{ ...item, price: itemPrice }}
+                        hideRemove={true}
+                      />
+                    );
+                  })}
                 </div>
               </div>
               <div className='payment__section'>
