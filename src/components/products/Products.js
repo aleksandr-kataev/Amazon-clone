@@ -1,7 +1,7 @@
 import React, { useEffect, useState, createRef } from 'react';
 import NotificationSystem from 'react-notification-system';
 import { useSpring, animated as a } from 'react-spring';
-
+import { Redirect } from 'react-router-dom';
 import './Products.css';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header } from '../index';
@@ -10,8 +10,10 @@ import { getProducts, addItemNotification } from '../../util';
 import { ProductsProps } from '../../types';
 
 const Products = ({ match }) => {
-  const [{ products }, dispatch] = useStateValue();
   const { label } = match.params;
+
+  const [{ products }, dispatch] = useStateValue();
+
   const [categoryRender, setCategoryRender] = useState(null);
 
   const notificationSystem = createRef();
@@ -47,6 +49,16 @@ const Products = ({ match }) => {
       category.slice(7, 10),
     ]);
   }, [match, dispatch, products]);
+
+  if (
+    label !== 'books' &&
+    'computer_electronics' &&
+    'sports_outdoors' &&
+    'health_beauty' &&
+    'children_baby'
+  ) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <>
