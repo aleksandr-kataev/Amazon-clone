@@ -1,6 +1,6 @@
 ## Amazon Clone
 
-![alt text](http://url/to/img.png)
+![alt text](https://i.imgur.com/Z4yeriE.png)
 
 [Demo](https://ibb.co/6D0xh8F)
 
