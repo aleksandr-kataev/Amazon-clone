@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSpring, animated as a } from 'react-spring';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+
 import './Register.css';
 import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
@@ -8,24 +9,27 @@ import { useStateValue } from '../../contextAPI/StateProvider';
 const Register = () => {
   const [{ user }] = useStateValue();
 
-  //Form states
   const [email, setEmail] = useState('');
   const [confEmail, setConfEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
   const [error, setError] = useState('');
 
-  //Redirect if logged in
+  // Redirect if logged in
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   const history = useHistory();
 
   const handleRegister = (e) => {
     e.preventDefault();
     if ((email || password || confEmail || confPassword) === '') {
-      console.log('err');
       setError('Some of the fields are empty');
       return;
     }
@@ -40,8 +44,8 @@ const Register = () => {
     }
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
-        if (auth) {
+      .then((authentication) => {
+        if (authentication) {
           setRedirectToReferrer(true);
         }
       })
@@ -107,12 +111,13 @@ const Register = () => {
               </button>
 
               <p className='register__agreement'>
-                By registering you agree to AMAZON'S CLONE Conditions
-                of Use & Sale. Please see out Privacy Notice, out
-                Cookies Notice and out Interest-Based Ads
+                By registering you agree to AMAZON&apos;S CLONE
+                Conditions of Use & Sale. Please see out Privacy
+                Notice, out Cookies Notice and out Interest-Based Ads
               </p>
 
               <button
+                type='button'
                 className='register__signInButton'
                 onClick={() => history.push('/login')}
               >

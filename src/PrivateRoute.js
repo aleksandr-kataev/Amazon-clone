@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+
 import { useStateValue } from './contextAPI/StateProvider';
+import { PrivateRoutePropTypes } from './types';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [{ user }] = useStateValue();
@@ -14,7 +17,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: props.location },
+              state: {
+                from: props.location,
+              },
             }}
           />
         )
@@ -22,5 +27,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
+
+PrivateRoute.propTypes = PrivateRoutePropTypes;
 
 export default PrivateRoute;

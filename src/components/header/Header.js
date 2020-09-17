@@ -2,6 +2,7 @@ import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import { Link, useHistory } from 'react-router-dom';
+
 import './Header.css';
 import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
@@ -36,8 +37,11 @@ const Header = () => {
         <div className='header__nav'>
           <Link to={!user && '/login'}>
             <div
+              onKeyDown={user && handleSignOut}
+              role='button'
               onClick={user && handleSignOut}
               className='header__option'
+              tabIndex={0}
             >
               <span className='header__optionLineOne'>
                 {user ? `Welcome ${user.email}` : 'Hello Guest'}

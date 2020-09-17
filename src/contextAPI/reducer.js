@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 export const initialState = {
   basket: [],
   user: null,
@@ -13,7 +14,6 @@ export const getBasketTotal = (basket) =>
   }, 0);
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case 'ADD_ITEM':
       return {
@@ -25,12 +25,12 @@ const reducer = (state, action) => {
         (basketItem) => basketItem.id === action.id,
       );
 
-      let newBasket = [...state.basket];
+      const newBasket = [...state.basket];
 
       if (index >= 0) {
         newBasket.splice(index, 1);
       } else {
-        console.warn(`id: ${action.id} is not in the basket!`);
+        throw Error(`id: ${action.id} is not in the basket!`);
       }
       return {
         ...state,

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Link, useHistory } from 'react-router-dom';
+import { Redirect, Link, useHistory } from 'react-router-dom';
 import { useSpring, animated as a } from 'react-spring';
+
 import './Login.css';
 import { auth } from '../../firebase';
 import { useStateValue } from '../../contextAPI/StateProvider';
@@ -13,8 +13,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
+  // Redirect if logged in
   const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
   const history = useHistory();
@@ -22,7 +28,6 @@ const Login = () => {
   const handleSignIn = (e) => {
     e.preventDefault();
     if ((email || password) === '') {
-      console.log('err');
       setError('Empty fields');
       return;
     }
@@ -31,8 +36,8 @@ const Login = () => {
       .then(() => {
         setRedirectToReferrer(true);
       })
-      .catch((error) => {
-        setError(error.message);
+      .catch((err) => {
+        setError(err.message);
       });
   };
 
@@ -79,12 +84,13 @@ const Login = () => {
               </button>
 
               <p className='login__agreement'>
-                By signing-in you agree to AMAZON'S CLONE Conditions
-                of Use & Sale. Please see out Privacy Notice, out
-                Cookies Notice and out Interest-Based Ads
+                By signing-in you agree to AMAZON&apos;S CLONE
+                Conditions of Use & Sale. Please see out Privacy
+                Notice, out Cookies Notice and out Interest-Based Ads
               </p>
 
               <button
+                type='button'
                 className='login__registerButton'
                 onClick={() => history.push('/register')}
               >

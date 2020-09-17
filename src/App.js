@@ -22,7 +22,7 @@ import { useStateValue } from './contextAPI/StateProvider';
 import { getProducts } from './util';
 
 function App() {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   useEffect(() => {
     const setProducts = async () => {

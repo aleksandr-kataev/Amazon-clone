@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+
 import './SubHeader.css';
 
 const SubHeader = () => {
   const history = useHistory();
+
   return (
     <div className='subheader'>
       <div className='subheader__delivery'>
@@ -12,6 +14,7 @@ const SubHeader = () => {
       </div>
       <div className='subheader__items'>
         <button
+          type='button'
           id='subheader__deals'
           className='subheader__link'
           onClick={() => {
@@ -22,6 +25,7 @@ const SubHeader = () => {
         </button>
         <div className='subheader__item'>
           <button
+            type='button'
             className='subheader__link'
             onClick={() => {
               history.push(`/products/books`);
@@ -32,6 +36,7 @@ const SubHeader = () => {
         </div>
         <div className='subheader__item'>
           <button
+            type='button'
             className='subheader__link'
             onClick={() => {
               history.push(`/products/computer_electronics`);
@@ -42,6 +47,7 @@ const SubHeader = () => {
         </div>
         <div className='subheader__item'>
           <button
+            type='button'
             className='subheader__link'
             onClick={() => {
               history.push(`/products/sports_outdoors`);
@@ -52,6 +58,7 @@ const SubHeader = () => {
         </div>
         <div className='subheader__item'>
           <button
+            type='button'
             className='subheader__link'
             onClick={() => {
               history.push(`/products/health_beauty`);
@@ -62,6 +69,7 @@ const SubHeader = () => {
         </div>
         <div className='subheader__item'>
           <button
+            type='button'
             className='subheader__link'
             onClick={() => {
               history.push(`/products/children_baby`);

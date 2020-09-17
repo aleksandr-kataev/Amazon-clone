@@ -10,7 +10,12 @@ import { getDeals, addItemNotification } from '../../util';
 const Deals = () => {
   const [dealsRender, setDealsRender] = useState(null);
   const notificationSystem = createRef();
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   const handleNotification = (e) => {
     addItemNotification(e, notificationSystem);
@@ -38,8 +43,8 @@ const Deals = () => {
         <NotificationSystem ref={notificationSystem} />
         {dealsRender && (
           <div className='deals'>
-            {dealsRender?.products.map((product, i) => (
-              <div className='deals__row' key={i}>
+            {dealsRender?.products.map((product) => (
+              <div className='deals__row'>
                 {product.map((item) => (
                   <DealProduct
                     id={item.id}

@@ -46,9 +46,8 @@ export const recurringStar = (rating) => {
   if (recurringRating >= 0.4 && recurringRating <= 0.6) {
     return HalfStar;
   }
-  if (recurringRating >= 0.7 && recurringRating <= 0.8) {
-    return TwoThirdsStar;
-  }
+
+  return TwoThirdsStar;
 };
 
 export const addItemNotification = (e, notificationSystem) => {

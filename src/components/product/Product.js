@@ -4,6 +4,7 @@ import './Product.css';
 import { useStateValue } from '../../contextAPI/StateProvider';
 import { recurringStar } from '../../util';
 import { FullStar } from '../../artifacts/svg/index';
+import { ProductProps } from '../../types';
 
 const Product = ({
   id,
@@ -13,7 +14,7 @@ const Product = ({
   rating,
   addItemNotification,
 }) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const addToBasket = (e) => {
     dispatch({
@@ -44,7 +45,7 @@ const Product = ({
           </div>
           <div className='product__priceContainer'>
             <span className='product__recurringPrice'>
-              {'.'}
+              .
               {price.toString().split('.')[1] === undefined
                 ? 0
                 : price.toString().split('.')[1]}
@@ -54,7 +55,7 @@ const Product = ({
         <div className='product__rating'>
           {Array(Math.trunc(rating))
             .fill()
-            .map((_, i) => (
+            .map(() => (
               <div className='product__svgContainer'>
                 <img src={FullStar} alt='rating' />
               </div>
@@ -68,9 +69,13 @@ const Product = ({
       </div>
       <img src={image} alt='product' />
 
-      <button onClick={addToBasket}>Add to basket</button>
+      <button type='button' onClick={addToBasket}>
+        Add to basket
+      </button>
     </div>
   );
 };
+
+Product.propTypes = ProductProps;
 
 export default Product;

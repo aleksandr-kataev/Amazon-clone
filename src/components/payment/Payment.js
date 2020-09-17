@@ -7,6 +7,7 @@ import {
   CardElement,
 } from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
+
 import { db } from '../../firebase';
 import axios from '../../axios';
 import { useStateValue } from '../../contextAPI/StateProvider';
@@ -29,7 +30,12 @@ const Payment = () => {
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
 
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   useEffect(() => {
     const getClientSecret = async () => {
@@ -44,7 +50,7 @@ const Payment = () => {
         if (!res) throw Error();
         setClientSecret(res.data.clientSecret);
       } catch (err) {
-        console.warn(err);
+        setError(err.message);
       }
     };
     getClientSecret();
@@ -53,6 +59,7 @@ const Payment = () => {
     e.preventDefault();
     setProcessing(true);
 
+    // eslint-disable-next-line no-unused-vars
     const payload = await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
@@ -80,8 +87,8 @@ const Payment = () => {
         });
         history.replace('/orders');
       })
-      .catch((e) => {
-        setError(e);
+      .catch((err) => {
+        setError(err);
       });
   };
 
@@ -126,8 +133,11 @@ const Payment = () => {
                       : item.price;
                     return (
                       <CheckoutProduct
-                        item={{ ...item, price: itemPrice }}
-                        hideRemove={true}
+                        item={{
+                          ...item,
+                          price: itemPrice,
+                        }}
+                        hideRemove
                       />
                     );
                   })}
@@ -147,11 +157,12 @@ const Payment = () => {
                         )}
                         decimalScale={2}
                         value={getBasketTotal(basket)}
-                        displayType={'text'}
-                        thousandSeparator={true}
-                        prefix={'£'}
+                        displayType='text'
+                        thousandSeparator
+                        prefix='£'
                       />
                       <button
+                        type='submit'
                         disabled={
                           processing || disabled || succeeded || error
                         }

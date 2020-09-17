@@ -1,8 +1,10 @@
 import React from 'react';
+
 import './DealProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { recurringStar } from '../../../util';
 import { FullStar } from '../../../artifacts/svg/index';
+import { DealProductProps } from '../../../types';
 
 const DealProduct = ({
   id,
@@ -13,7 +15,7 @@ const DealProduct = ({
   rating,
   addItemNotification,
 }) => {
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const addToBasket = (e) => {
     dispatch({
@@ -46,7 +48,7 @@ const DealProduct = ({
           </div>
           <div className='dealProduct__priceContainer'>
             <span className='dealProduct__recurringPrice'>
-              {'.'}
+              .
               {offerPrice.toString().split('.')[1] === undefined
                 ? 0
                 : offerPrice.toString().split('.')[1]}
@@ -59,7 +61,7 @@ const DealProduct = ({
         <div className='dealProduct__rating'>
           {Array(Math.trunc(rating))
             .fill()
-            .map((_, i) => (
+            .map(() => (
               <div className='dealProduct__svgContainer'>
                 <img src={FullStar} alt='rating' />
               </div>
@@ -73,9 +75,13 @@ const DealProduct = ({
       </div>
       <img src={image} alt='dealProduct' />
 
-      <button onClick={addToBasket}>Add to basket</button>
+      <button type='button' onClick={addToBasket}>
+        Add to basket
+      </button>
     </div>
   );
 };
+
+DealProduct.propTypes = DealProductProps;
 
 export default DealProduct;

@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
 import CurrencyFormat from 'react-currency-format';
+
 import './Order.css';
 import CheckoutProduct from '../../checkout/checkoutProduct/CheckoutProduct';
+import { OrderProps } from '../../../types';
 
 const Order = ({ order }) => {
   return (
@@ -16,7 +18,7 @@ const Order = ({ order }) => {
 
       <div className='order__items'>
         {order.data.basket?.map((item) => (
-          <CheckoutProduct item={item} hideRemove={true} />
+          <CheckoutProduct item={item} hideRemove />
         ))}
       </div>
       <CurrencyFormat
@@ -25,12 +27,14 @@ const Order = ({ order }) => {
         )}
         decimalScale={2}
         value={order.data.amount / 100}
-        displayType={'text'}
-        thousandSeparator={true}
-        prefix={'£'}
+        displayType='text'
+        thousandSeparator
+        prefix='£'
       />
     </div>
   );
 };
+
+Order.propTypes = OrderProps;
 
 export default Order;

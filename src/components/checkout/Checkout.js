@@ -11,7 +11,12 @@ import CheckoutProduct from './checkoutProduct/CheckoutProduct';
 
 const Checkout = () => {
   const [{ basket, user }] = useStateValue();
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   const notificationSystem = createRef();
 
@@ -37,14 +42,17 @@ const Checkout = () => {
               <h2 className='checkout__title'>
                 Your shopping Basket
               </h2>
-              {basket.map((item, i) => {
+              {basket.map((item) => {
                 const itemPrice = item.offerPrice
                   ? item.offerPrice
                   : item.price;
                 return (
                   <CheckoutProduct
-                    key={i}
-                    item={{ ...item, price: itemPrice }}
+                    key={item.id}
+                    item={{
+                      ...item,
+                      price: itemPrice,
+                    }}
                     hideRemove={false}
                   />
                 );

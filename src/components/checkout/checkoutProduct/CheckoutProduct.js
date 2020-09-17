@@ -1,12 +1,14 @@
 import React from 'react';
+
 import './CheckoutProduct.css';
 import { useStateValue } from '../../../contextAPI/StateProvider';
 import { recurringStar } from '../../../util';
 import FullStar from '../../../artifacts/svg/FullStar.svg';
+import { CheckoutProductProps } from '../../../types';
 
 const CheckoutProduct = ({ item, hideRemove }) => {
   const { id, title, price, image, rating } = item;
-  const [{}, dispatch] = useStateValue();
+  const [, dispatch] = useStateValue();
 
   const removeFromBasket = () => {
     dispatch({
@@ -38,7 +40,7 @@ const CheckoutProduct = ({ item, hideRemove }) => {
           </div>
           <div className='product__priceContainer'>
             <span className='product__recurringPrice'>
-              {'.'}
+              .
               {price.toString().split('.')[1] === undefined
                 ? 0
                 : price.toString().split('.')[1]}
@@ -48,7 +50,7 @@ const CheckoutProduct = ({ item, hideRemove }) => {
         <div className='product__rating'>
           {Array(Math.trunc(rating))
             .fill()
-            .map((_, i) => (
+            .map(() => (
               <div className='product__svgContainer'>
                 <img src={FullStar} alt='rating' />
               </div>
@@ -60,7 +62,7 @@ const CheckoutProduct = ({ item, hideRemove }) => {
           )}
         </div>
         {!hideRemove && (
-          <button onClick={removeFromBasket}>
+          <button type='button' onClick={removeFromBasket}>
             Remove from basket
           </button>
         )}
@@ -68,5 +70,7 @@ const CheckoutProduct = ({ item, hideRemove }) => {
     </div>
   );
 };
+
+CheckoutProduct.propTypes = CheckoutProductProps;
 
 export default CheckoutProduct;

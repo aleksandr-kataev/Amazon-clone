@@ -5,6 +5,7 @@ import {
   animated as a,
 } from 'react-spring';
 import NotificationSystem from 'react-notification-system';
+
 import './Home.css';
 import { getFeatured, addItemNotification } from '../../util';
 import Product from '../product/Product';
@@ -30,15 +31,26 @@ const Home = () => {
   ];
 
   const [index, setIndex] = useState(0);
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
   const transitions = useTransition(index, (p) => p, {
     from: {
       opacity: 0,
       position: 'absolute',
       transform: 'translate3d(100%,0,0)',
     },
-    enter: { opacity: 1, transform: 'translate3d(0,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-100%,0,0)' },
+    enter: {
+      opacity: 1,
+      transform: 'translate3d(0,0,0)',
+    },
+    leave: {
+      opacity: 0,
+      transform: 'translate3d(-100%,0,0)',
+    },
   });
 
   const [featuredRender, setFeaturedRender] = useState(null);
@@ -51,7 +63,6 @@ const Home = () => {
   useEffect(() => {
     const retrieveFeatured = async () => {
       const res = await getFeatured();
-      console.log(res);
       setFeaturedRender([
         res.slice(0, 3),
         res.slice(3, 7),
@@ -82,8 +93,8 @@ const Home = () => {
               })}
             </div>
             <div className='home__container'>
-              {featuredRender?.map((product, i) => (
-                <div className='deals__row' key={i}>
+              {featuredRender?.map((product) => (
+                <div className='deals__row'>
                   {product.map((item) => (
                     <Product
                       id={item.id}

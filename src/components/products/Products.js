@@ -7,13 +7,20 @@ import { useStateValue } from '../../contextAPI/StateProvider';
 import { Header } from '../index';
 import Product from '../product/Product';
 import { getProducts, addItemNotification } from '../../util';
+import { ProductsProps } from '../../types';
 
 const Products = ({ match }) => {
   const [{ products }, dispatch] = useStateValue();
+  const { label } = match.params;
   const [categoryRender, setCategoryRender] = useState(null);
 
   const notificationSystem = createRef();
-  const fadeProps = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const fadeProps = useSpring({
+    opacity: 1,
+    from: {
+      opacity: 0,
+    },
+  });
 
   const handleNotification = (e) => {
     addItemNotification(e, notificationSystem);
@@ -32,7 +39,7 @@ const Products = ({ match }) => {
       retrieveProducts();
     }
     const category = products.filter(
-      (product) => product.category_label === match.params.label,
+      (product) => product.category_label === label,
     );
     setCategoryRender([
       category.slice(0, 3),
@@ -49,8 +56,8 @@ const Products = ({ match }) => {
         <div className='products'>
           {categoryRender ? (
             <>
-              {categoryRender?.map((product, i) => (
-                <div className='products__row' key={i}>
+              {categoryRender?.map((product) => (
+                <div className='products__row'>
                   {product.map((item) => (
                     <Product
                       id={item.id}
@@ -71,5 +78,7 @@ const Products = ({ match }) => {
     </>
   );
 };
+
+Products.propTypes = ProductsProps;
 
 export default Products;
