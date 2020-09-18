@@ -48,14 +48,14 @@ const Products = ({ match }) => {
       category.slice(3, 7),
       category.slice(7, 10),
     ]);
-  }, [match, dispatch, products]);
+  }, [match, dispatch, products, label]);
 
   if (
     label !== 'books' &&
-    'computer_electronics' &&
-    'sports_outdoors' &&
-    'health_beauty' &&
-    'children_baby'
+    label !== 'computer_electronics' &&
+    label !== 'sports_outdoors' &&
+    label !== 'health_beauty' &&
+    label !== 'children_baby'
   ) {
     return <Redirect to='/' />;
   }

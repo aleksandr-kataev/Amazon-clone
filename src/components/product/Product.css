@@ -69,3 +69,10 @@
   z-index: 9999;
   position: absolute;
 }
+
+@media (max-width: 1550px) {
+  .product {
+    max-height: 300px;
+    font-size: 0.8rem;
+  }
+}

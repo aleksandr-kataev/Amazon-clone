@@ -38,3 +38,10 @@ body {
     rgba(0, 0, 0, 0)
   );
 }
+
+@media (max-width: 1550px) {
+  .home__row {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}

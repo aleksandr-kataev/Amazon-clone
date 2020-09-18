@@ -55,8 +55,8 @@ const Product = ({
         <div className='product__rating'>
           {Array(Math.trunc(rating))
             .fill()
-            .map(() => (
-              <div className='product__svgContainer'>
+            .map((_, i) => (
+              <div key={i} className='product__svgContainer'>
                 <img src={FullStar} alt='rating' />
               </div>
             ))}

@@ -71,15 +71,6 @@ export const ProductsProps = {
 
 export const StateProviderPropTypes = {
   reducer: func.isRequired,
-  initialState: arrayOf(
-    shape({
-      id: string,
-      title: string,
-      image: string,
-      price: number,
-      rating: number,
-    }),
-  ),
 };
 
 export const StateProviderDefaultProps = {
@@ -94,3 +85,13 @@ export const StateProviderDefaultProps = {
 export const PrivateRoutePropTypes = {
   component: func.isRequired,
 };
+
+/**
+ * shape({
+      id: string,
+      title: string,
+      image: string,
+      price: number,
+      rating: number,
+    }),
+ */

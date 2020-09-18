@@ -93,10 +93,11 @@ const Home = () => {
               })}
             </div>
             <div className='home__container'>
-              {featuredRender?.map((product) => (
-                <div className='deals__row'>
+              {featuredRender?.map((product, i) => (
+                <div className='deals__row' key={i}>
                   {product.map((item) => (
                     <Product
+                      key={item.id}
                       id={item.id}
                       title={item.title}
                       rating={item.rating}
