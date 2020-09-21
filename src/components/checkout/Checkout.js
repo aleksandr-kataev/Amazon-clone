@@ -48,7 +48,6 @@ const Checkout = () => {
                   : item.price;
                 return (
                   <CheckoutProduct
-                    key={item.id}
                     item={{
                       ...item,
                       price: itemPrice,
