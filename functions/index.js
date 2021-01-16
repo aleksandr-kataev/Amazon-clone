@@ -114,7 +114,6 @@ exports.getFeatured = functions.pubsub
     };
 
     db.collection('featured').doc('featuredDoc').set(obj);
-
     return null;
   });
 
@@ -124,7 +123,7 @@ exports.getDeals = functions.pubsub
   .timeZone('Europe/Guernsey')
   .onRun(async (context) => {
     const apiUrl =
-      'https://amazon-deals.p.rapidapi.com/amazon-offers/all';
+      'https://amazon-products1.p.rapidapi.com/offers';
 
     const config = {
       headers: {
@@ -132,32 +131,27 @@ exports.getDeals = functions.pubsub
         'x-rapidapi-key': functions.config().deals.api_key,
         useQueryString: true,
       },
+      params: {
+        'min_number': '10',
+        'country': 'UK',
+        'type': 'LIGHTNING_DEAL',
+        'max_number': '10'
+      }
     };
 
     const fetchResponse = await axios.get(apiUrl, config);
-    const products = fetchResponse.data.offers.map((category) => {
-      return category.products[
-        Math.floor(Math.random() * category.products.length)
-      ];
-    });
 
-    const productsToGB = products.map((product) => {
+    if (fetchResponse.data.error) throw new Error('Error occured in fetch');
+    const productArray = fetchResponse.data.offers.map((product) => {
       return {
-        ...product,
-        reviewRating: round(product.reviewRating, 1),
-        normalPrice: round(product.normalPrice * 0.78, 2),
-        offerPrice: round(product.offerPrice * 0.78, 2),
-      };
-    });
-
-    const obj = {
-      updated: fetchResponse.data.update_time,
-      products: productsToGB.slice(0, 10),
-    };
-
-    db.collection('deals').doc('dealsDoc').set(obj);
-
+        id: product.asin,
+        title: product.title,
+        rating: product.reviews.stars,
+        offerPrice: product.prices.current_price,
+        normalPrice: product.prices.previous_price,
+        image: product.images[0],
+      }
+    })
+    db.collection('deals').doc('dealsDoc').set({ products: productArray })
     return null;
   });
-
-// http://localhost:5001/clone-332a8/us-central1/api
