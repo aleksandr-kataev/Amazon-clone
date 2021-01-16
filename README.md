@@ -9,4 +9,4 @@
 - React
 - Firebase
 - [Stripe](https://stripe.com/) - online payment system
-- [Amazon Deals API](https://rapidapi.com/frerescodeurs/api/amazon-deals) - realtime Amazon deals API
+- [Amazon Products API](https://rapidapi.com/ZombieBest/api/amazon-products1) - Amazon products/offers API
