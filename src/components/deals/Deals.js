@@ -48,11 +48,11 @@ const Deals = () => {
                 {product.map((item) => (
                   <DealProduct
                     id={item.id}
-                    title={item.description}
-                    rating={item.reviewRating}
+                    title={item.title}
+                    rating={item.rating}
                     offerPrice={item.offerPrice}
                     normalPrice={item.normalPrice}
-                    image={item.imageUrl}
+                    image={item.image}
                     addItemNotification={handleNotification}
                   />
                 ))}
